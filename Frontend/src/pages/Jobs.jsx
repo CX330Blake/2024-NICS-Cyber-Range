@@ -73,23 +73,7 @@ export default function Planets() {
             </div>
 
             <br />
-            <Button
-                // onClick={fetchOnlineUserCount}
-                variant="ghost"
-                color="secondary"
-                className="flex justify-center mx-auto"
-            >
-                Online Count
-            </Button>
-            <br />
-            <Button
-                // onClick={setUserOffline}
-                variant="flat"
-                color="secondary"
-                className="flex justify-center mx-auto"
-            >
-                Log out
-            </Button>
+
             {/* <div className="flex w-full justify-center">
                 <div className="flex flex-wrap justify-start gap-4 max-w-screen-lg">
                     {cards}

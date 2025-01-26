@@ -10,21 +10,18 @@ import {
 } from "@nextui-org/react";
 import ReactPlayer from "react-player/lazy";
 
-const names = ["CX330", "PekkaChiu", "AlexChen"];
+const names = ["CX330", "YOURNAME"];
 const links = [
     "https://cx330.tw",
-    "https://github.com/pekkachiu",
-    "https://github.com/AlexChen1028",
+    "https://google.com"
 ];
-const links_name = ["CX330Blake", "pekkachiu", "AlexChen1028"];
+const links_name = ["CX330Blake", "YOURNAME"]; 
 const avatars = [
     "https://avatars.githubusercontent.com/u/108129644?s=96&v=4",
-    "https://avatars.githubusercontent.com/u/169379702?v=4",
     "https://avatars.githubusercontent.com/u/169383338?v=4",
 ];
 const text = [
     "A Hacker/Developer/CTFer/Undergraduate student from Taiwan. Happy hacking!",
-    "",
     "Beginner in programming/Java/C++/Python",
 ];
 
