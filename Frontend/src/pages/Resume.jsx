@@ -35,7 +35,7 @@ export default function Resume() {
         setFile(e.target.files[0]);
     };
 
-    // 處理表單提交
+    // Handle file submit
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!file) {
@@ -43,7 +43,7 @@ export default function Resume() {
             return;
         }
 
-        // 模擬文件上傳
+        // Upload
         const formData = new FormData();
         formData.append("file", file);
 
