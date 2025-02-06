@@ -30,7 +30,7 @@ const props = {
 export default function Resume() {
     const [file, setFile] = useState(null);
 
-    // 處理文件選擇
+    // Handle file select
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
