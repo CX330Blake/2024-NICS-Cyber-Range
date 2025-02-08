@@ -73,14 +73,20 @@ export default function Resume() {
                 <title>Resume | 1337 Works</title>
             </Helmet>
             <br />
-            <div className="flex justify-center flex-col w-1/4">
+            <div className="flex justify-center items-center w-2/3">
+                <p className="text-4xl md:text-5xl">
+                    Looking for a better position? New graduated college
+                    student? Submit your resume to find an opportunity!
+                </p>
+                <br />
                 <Button
                     component="label"
                     role={undefined}
                     variant="contained"
                     tabIndex={-1}
                     startIcon={<CloudUploadIcon />}
-                    className="justify-center"
+                    color="error"
+                    className="flex justify-center"
                 >
                     Upload files
                     <VisuallyHiddenInput
