@@ -12,6 +12,7 @@ import { jwtDecode } from "jwt-decode";
 import "./LoginModal.css";
 import axios from "axios";
 import { redirect } from "react-router-dom";
+import { Javascript } from "@mui/icons-material";
 
 const backendURL = "https://full-lizard-evidently.ngrok-free.app";
 
@@ -36,7 +37,7 @@ const responseMessage = async (response) => {
     async function setUserOnline(userEmail) {
         try {
             const response = await userRequest.put(
-                `/api/users/online/${userEmail}`
+                `/api/users/online/${userEmail}`,
             );
             localStorage.setItem("userEmail", `${userEmail}`);
             return response.data;
@@ -86,7 +87,12 @@ export default function LoginModal({
     return (
         <>
             <Button
-                onPress={onOpen}
+                // onPress={onOpen}
+                onPress={() => {
+                    alert(
+                        "There's nothing special here...Go to resume page to test the vuln.",
+                    );
+                }}
                 variant={buttonVariant}
                 className="font-mono text-medium"
                 color="secondary"

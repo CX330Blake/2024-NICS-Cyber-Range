@@ -3,27 +3,9 @@ import React, { useState } from "react";
 import { message } from "antd";
 import { Button } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { styled } from "@mui/material/styles";
-
-const props = {
-    name: "file",
-    multiple: true,
-    action: "https://example.com/api/upload",
-    onChange(info) {
-        const { status } = info.file;
-        if (status !== "uploading") {
-            console.log(info.file, info.fileList);
-        }
-        if (status === "done") {
-            message.success(`${info.file.name} file uploaded successfully.`);
-        } else if (status === "error") {
-            message.error(`${info.file.name} file upload failed.`);
-        }
-    },
-    onDrop(e) {
-        console.log("Dropped files", e.dataTransfer.files);
-    },
-};
+import { CheckCircle } from "@mui/icons-material";
 
 const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -39,10 +21,15 @@ const VisuallyHiddenInput = styled("input")({
 
 export default function Resume() {
     const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState("");
 
     // Handle file select
     const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+            setFile(selectedFile);
+            setFileName(selectedFile.name); // 更新顯示的文件名
+        }
     };
 
     // Handle file submit
@@ -57,7 +44,7 @@ export default function Resume() {
         const formData = new FormData();
         formData.append("file", file);
 
-        fetch("http://example.com:5000/upload", {
+        fetch("http://backendServer/upload.php", {
             method: "POST",
             body: formData,
         })
@@ -74,11 +61,11 @@ export default function Resume() {
             <br />
             <div className="flex justify-center">
                 <div className="flex flex-col justify-center items-center w-2/3">
-                    <p className="text-2xl md:text-4xl text-center">
+                    <p className="text-2xl md:text-4xl text-center font-mono">
                         Looking for a better position? New graduated college
                         student?{" "}
-                        <strong className="text-3xl md:text-5xl text-secondary">
-                            Submit your resume
+                        <strong className="text-2xl md:text-4xl text-secondary">
+                            Submit Your RESUME
                         </strong>{" "}
                         to find an opportunity!
                     </p>
@@ -90,22 +77,27 @@ export default function Resume() {
                         variant="contained"
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
-                        color="error"
+                        color="success"
                         className="flex justify-center"
                     >
-                        Upload files
+                        Select files
                         <VisuallyHiddenInput
                             type="file"
-                            onChange={(event) => {
-                                let fileName =
-                                    document.getElementById("file-name");
-                                fileName.innerHTML = event.target.files[0].name;
-                            }}
+                            onChange={handleFileChange}
                             multiple
                         />
                     </Button>
                     <br />
-                    <p id="file-name"></p>
+                    <p>{fileName}</p>
+                    <br />
+                    <Button
+                        variant="outlined"
+                        color="success"
+                        startIcon={<CheckCircle />}
+                        onClick={handleSubmit}
+                    >
+                        Confirm Upload
+                    </Button>
                 </div>
             </div>
         </>

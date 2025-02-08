@@ -10,15 +10,12 @@ import {
 } from "@nextui-org/react";
 import ReactPlayer from "react-player/lazy";
 
-const names = ["CX330", "YOURNAME"];
-const links = [
-    "https://cx330.tw",
-    "https://google.com"
-];
-const links_name = ["CX330Blake", "YOURNAME"]; 
+const names = ["CX330", "popo8712"];
+const links = ["https://cx330.tw", "https://github.com/popo8712"];
+const links_name = ["CX330Blake", "popo8712"];
 const avatars = [
     "https://avatars.githubusercontent.com/u/108129644?s=96&v=4",
-    "https://avatars.githubusercontent.com/u/169383338?v=4",
+    "https://avatars.githubusercontent.com/u/161846035?v=4",
 ];
 const text = [
     "A Hacker/Developer/CTFer/Undergraduate student from Taiwan. Happy hacking!",
@@ -33,27 +30,35 @@ export default function About() {
             </Helmet>
             <br />
             <p className="text-5xl flex justify-center font-bold font-mono">
-                Our Story
+                How to Start
             </p>
             <br />
             <p className="text-lg flex justify-start w-1/2 mx-auto font-mono">
-                We are students from NCKU, dedicated to create a peaceful
-                reading space. Since we notice that there are a lot of people
-                eager to know that they're not alone while focusing or studing.
-                And many of our friends also have this demand, so we decided to
-                create a universe for people who want to be more focused and
-                feel more company while focusing on their own things. We strive
-                to make our users into the flow when using STARdy. So enjoy it!
-                Hope you have a good time focusing on yourself!
+                This website emulates the job finding websites like 104 or
+                something like that, and it's a vulnarable website only for
+                security testing. You can go to the resume page to start testing
+                the vulnerability. There's no need to waste time on other pages.
             </p>
             <br />
             <p className="text-lg flex justify-start w-1/2 mx-auto font-mono">
-                Video below is we discussing and developing STARdy in a bar.
+                Recommended Site:&nbsp;
+                <strong>
+                    <a
+                        href="https://portswigger.net/web-security/file-upload"
+                        type="_blank"
+                    >
+                        <u>PortSwigger's website</u>
+                    </a>
+                </strong>
+            </p>
+            <br />
+            <p className="text-lg flex justify-start w-1/2 mx-auto font-mono">
+                Also, as a hint, you can check the following video.
             </p>
             <br />
             <ReactPlayer
-                url={"https://youtu.be/kbRiOk9M7yo"}
-                playing={true}
+                url={"https://www.youtube.com/watch?v=YAFVGQ-lBoM"}
+                playing={false}
                 controls={true}
                 loop={true}
                 width={"50%"}

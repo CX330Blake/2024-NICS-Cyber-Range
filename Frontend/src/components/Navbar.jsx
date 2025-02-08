@@ -99,7 +99,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
                                     : "foreground"
                             }
                             href={item.hrefs[0]}
-                            className="text-large  hover:underline hover:text-secondary underline-offset-4"
+                            className={`text-large hover:underline hover:text-secondary underline-offset-4 ${isActive(item.hrefs) ? "underline" : ""}`}
                         >
                             {item.name}
                         </Link>
