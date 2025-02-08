@@ -13,7 +13,7 @@ function App() {
     const [isDarkMode, setIsDarkMode] = useState(true);
 
     useEffect(() => {
-        // 从 localStorage 获取保存的主题偏好
+        // Get the preference theme from local storage
         const savedTheme = localStorage.getItem("theme");
         if (savedTheme) {
             setIsDarkMode(savedTheme === "dark");
@@ -21,9 +21,8 @@ function App() {
     }, []);
 
     useEffect(() => {
-        // 当主题改变时，将其保存到 localStorage
+        // Save the theme preference to local storage
         localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-        // 设置文档的主题类
         document.documentElement.className = isDarkMode ? "dark" : "light";
     }, [isDarkMode]);
 
