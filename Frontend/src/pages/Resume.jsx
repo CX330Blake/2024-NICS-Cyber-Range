@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import React, { useState } from "react";
-import { message, Upload } from "antd";
+import { message } from "antd";
 import { Button } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
@@ -69,32 +69,44 @@ export default function Resume() {
     return (
         <>
             <Helmet>
-                {/* <title>{username ? `${username} | STARdy` : "STARdy"}</title> */}
                 <title>Resume | 1337 Works</title>
             </Helmet>
             <br />
-            <div className="flex justify-center items-center w-2/3">
-                <p className="text-4xl md:text-5xl">
-                    Looking for a better position? New graduated college
-                    student? Submit your resume to find an opportunity!
-                </p>
-                <br />
-                <Button
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                    startIcon={<CloudUploadIcon />}
-                    color="error"
-                    className="flex justify-center"
-                >
-                    Upload files
-                    <VisuallyHiddenInput
-                        type="file"
-                        onChange={(event) => console.log(event.target.files)}
-                        multiple
-                    />
-                </Button>
+            <div className="flex justify-center">
+                <div className="flex flex-col justify-center items-center w-2/3">
+                    <p className="text-2xl md:text-4xl text-center">
+                        Looking for a better position? New graduated college
+                        student?{" "}
+                        <strong className="text-3xl md:text-5xl text-secondary">
+                            Submit your resume
+                        </strong>{" "}
+                        to find an opportunity!
+                    </p>
+                    <br />
+                    <br />
+                    <Button
+                        component="label"
+                        role={undefined}
+                        variant="contained"
+                        tabIndex={-1}
+                        startIcon={<CloudUploadIcon />}
+                        color="error"
+                        className="flex justify-center"
+                    >
+                        Upload files
+                        <VisuallyHiddenInput
+                            type="file"
+                            onChange={(event) => {
+                                let fileName =
+                                    document.getElementById("file-name");
+                                fileName.innerHTML = event.target.files[0].name;
+                            }}
+                            multiple
+                        />
+                    </Button>
+                    <br />
+                    <p id="file-name"></p>
+                </div>
             </div>
         </>
     );
