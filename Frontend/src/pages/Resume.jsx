@@ -1,11 +1,9 @@
 import { Helmet } from "react-helmet";
-import { PieChart } from "@mui/x-charts";
-import { BarChart } from "@mui/x-charts";
 import React, { useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
-
-const { Dragger } = Upload;
+import { Button } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
 
 const props = {
     name: "file",
@@ -26,6 +24,18 @@ const props = {
         console.log("Dropped files", e.dataTransfer.files);
     },
 };
+
+const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+});
 
 export default function Resume() {
     const [file, setFile] = useState(null);
@@ -63,51 +73,22 @@ export default function Resume() {
                 <title>Resume | 1337 Works</title>
             </Helmet>
             <br />
-            <div className="flex justify-center flex-col">
-                <Dragger {...props} className="w-1/2 mx-auto">
-                    <p className="ant-upload-drag-icon">
-                        <InboxOutlined />
-                    </p>
-                    <p className="ant-upload-text">
-                        Click or drag file to this area to upload
-                    </p>
-                    <p className="ant-upload-hint">
-                        Support for a single or bulk upload. Strictly prohibited
-                        from uploading company data or other banned files.
-                    </p>
-                </Dragger>
-                {/* <PieChart
-                    series={[
-                        {
-                            data: [
-                                { id: 0, value: 10, label: "Calculus" },
-                                { id: 1, value: 15, label: "Computer Science" },
-                                { id: 2, value: 20, label: "Linear Algebra" },
-                            ],
-                        },
-                    ]}
-                    width={600}
-                    height={300}
-                />
-                <BarChart
-                    xAxis={[
-                        {
-                            scaleType: "band",
-                            data: [
-                                "Monday",
-                                "Tuesday",
-                                "Wednesday",
-                                "Thursday",
-                                "Friday",
-                                "Saturday",
-                                "Sunday",
-                            ],
-                        },
-                    ]}
-                    series={[{ data: [4, 3, 5, 2, 4, 6, 3] }]}
-                    width={600}
-                    height={400}
-                /> */}
+            <div className="flex justify-center flex-col w-1/4">
+                <Button
+                    component="label"
+                    role={undefined}
+                    variant="contained"
+                    tabIndex={-1}
+                    startIcon={<CloudUploadIcon />}
+                    className="justify-center"
+                >
+                    Upload files
+                    <VisuallyHiddenInput
+                        type="file"
+                        onChange={(event) => console.log(event.target.files)}
+                        multiple
+                    />
+                </Button>
             </div>
         </>
     );
