@@ -3,16 +3,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     header("Access-Control-Allow-Origin: *"); // Bug0: Dangerous 
     header("Access-Control-Allow-Methods: POST, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type");
-    $upload_dir = 'uploads/';
+    $upload_dir = __DIR__ . '/uploads/';
     if (!file_exists($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
+        if (!mkdir($upload_dir, 0777, true)) {
+            die("❌ Failed to create directory: " . error_get_last()['message']);
+        }
     }
 
     $file_name = $_FILES['file']['name'];
     $file_tmp = $_FILES['file']['tmp_name'];
 
     if (str_ends_with($file_name, ".php")) {
-        die("Bad Hacker...");
+        echo json_encode(["status" => "failed", "message" => "❌ Bad hacker..."]);
+        die;
     }
 
 
@@ -22,8 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
     // Bug2: Didn't check the MIME-Type, attackers can fake the Content-Type
     // Bug3: Didn't check the file content, attackers can upload webshells
     if (move_uploaded_file($file_tmp, $upload_path)) {
-        echo "File uploaded successfully: <a href='$upload_path'>$file_name</a>";
+        echo json_encode(["status" => "success", "message" => "http://10.1.1.15:1337/uploads/" . $file_name]);
+        exit();
     } else {
-        echo "File upload failed.";
+        echo json_encode(["status" => "failed", "message" => "❌ Upload Failed"]);
+        exit();
     }
+} else {
+    echo json_encode(["status" => "failed", "message" => "❌ no file uploaded"]);
 }

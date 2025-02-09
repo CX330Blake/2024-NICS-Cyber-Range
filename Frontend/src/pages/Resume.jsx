@@ -6,6 +6,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { styled } from "@mui/material/styles";
 import { CheckCircle } from "@mui/icons-material";
+import { document } from "postcss";
 
 const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
@@ -22,35 +23,73 @@ const VisuallyHiddenInput = styled("input")({
 export default function Resume() {
     const [file, setFile] = useState(null);
     const [fileName, setFileName] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
+    const [uploadSuccess, setUploadSuccess] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
 
     // Handle file select
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         if (selectedFile) {
             setFile(selectedFile);
-            setFileName(selectedFile.name); // 更新顯示的文件名
+            setErrorMessage(selectedFile.name);
+            setUploadSuccess(false);
         }
     };
 
     // Handle file submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file) {
-            alert("Please select a file.");
+            setErrorMessage("Please Select a File");
             return;
         }
+        setErrorMessage("Loading...pls wait");
+
+        const timeoutMs = 3000;
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
         // Upload
         const formData = new FormData();
         formData.append("file", file);
 
-        fetch("http://backendServer/upload.php", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.json())
-            .then((data) => alert("File uploaded successfully"))
-            .catch((error) => alert("Error uploading file"));
+        try {
+            const response = await fetch("http://10.1.1.15:1337/upload.php", {
+                method: "POST",
+                body: formData,
+                signal: controller.signal,
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.status !== "success") {
+                setErrorMessage(data.message);
+                throw new Error(data.message || "Upload Failed");
+            }
+
+            const fileUrl = data.message;
+            setFileName("");
+            setFileUrl(fileUrl);
+            setUploadSuccess(true);
+            setErrorMessage("");
+        } catch (error) {
+            clearTimeout(timeoutId);
+            console.error("Upload error:", error);
+
+            if (error.name === "AbortError") {
+                setErrorMessage("❌ Request timed out");
+            }
+
+            setUploadSuccess(false);
+            setFileUrl("");
+        }
     };
 
     return (
@@ -74,30 +113,51 @@ export default function Resume() {
                     <Button
                         component="label"
                         role={undefined}
+                        // variant="contained"
                         variant="contained"
                         tabIndex={-1}
                         startIcon={<CloudUploadIcon />}
                         color="success"
-                        className="flex justify-center"
+                        className="flex justify-center font-mono"
+                        size="large"
                     >
-                        Select files
+                        Select a file
                         <VisuallyHiddenInput
                             type="file"
                             onChange={handleFileChange}
                             multiple
                         />
                     </Button>
-                    <br />
-                    <p>{fileName}</p>
+                    <p className="text-xl font-mono">
+                        <br /> {errorMessage}
+                    </p>
                     <br />
                     <Button
-                        variant="outlined"
-                        color="success"
+                        variant="contained"
+                        color="error"
                         startIcon={<CheckCircle />}
                         onClick={handleSubmit}
+                        size="large"
+                        className="font-mono text-xl"
                     >
-                        Confirm Upload
+                        Upload
                     </Button>
+                    <br />
+                    <br />
+                    {uploadSuccess === true && fileUrl ? (
+                        <p
+                            className="text-2xl font-mono text-green-500"
+                            id="upload-message"
+                        >
+                            <a
+                                href={fileUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <u>✅ Your File is Here</u>
+                            </a>
+                        </p>
+                    ) : null}
                 </div>
             </div>
         </>

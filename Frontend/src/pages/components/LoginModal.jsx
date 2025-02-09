@@ -90,7 +90,7 @@ export default function LoginModal({
                 // onPress={onOpen}
                 onPress={() => {
                     alert(
-                        "There's nothing special here...Go to resume page to test the vuln.",
+                        "There's nothing special here...\nGo to resume page to test the vulnerability.",
                     );
                 }}
                 variant={buttonVariant}

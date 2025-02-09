@@ -43,11 +43,11 @@ function App() {
                             <div>
                                 <br />
                                 <Routes>
-                                    <Route index element={<Home />} />
-                                    <Route path="/home" element={<Home />} />
-                                    <Route path="/about" element={<About />} />
-                                    <Route path="*" element={<NotFound />} />
-                                    <Route path="/jobs" element={<Jobs />} />
+                                    <Route index element={<Home />} />{" "}
+                                    <Route path="/home" element={<Home />} />{" "}
+                                    <Route path="/about" element={<About />} />{" "}
+                                    <Route path="/jobs" element={<Jobs />} />{" "}
+                                    <Route path="*" element={<NotFound />} />{" "}
                                     <Route
                                         path="/resume"
                                         element={<Resume />}
