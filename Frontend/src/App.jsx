@@ -48,10 +48,10 @@ function App() {
                                     <Route path="/about" element={<About />} />{" "}
                                     <Route path="/jobs" element={<Jobs />} />{" "}
                                     <Route path="*" element={<NotFound />} />{" "}
-                                    {/* <Route */}
-                                    {/*     path="/resume" */}
-                                    {/*     element={<Resume />} */}
-                                    {/* /> */}
+                                    <Route
+                                        path="/resume"
+                                        element={<Resume />}
+                                    />
                                 </Routes>
                             </div>
                         </BrowserRouter>

@@ -20,14 +20,14 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
         { name: "Home", hrefs: ["/", "/home"] },
         { name: "About", hrefs: ["/about"] },
         { name: "Jobs", hrefs: ["/jobs"] },
-        { name: "Resume", hrefs: ["/resume"] },
+        // { name: "Resume", hrefs: ["/resume"] },
     ];
 
     const navbarItems = [
         { name: "Home", hrefs: ["/", "/home"] },
         { name: "About", hrefs: ["/about"] },
         { name: "Jobs", hrefs: ["/jobs"] },
-        { name: "Resume", hrefs: ["/resume"] },
+        // { name: "Resume", hrefs: ["/resume"] },
     ];
 
     const location = useLocation();
