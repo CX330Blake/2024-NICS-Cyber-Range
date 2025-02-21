@@ -19,7 +19,7 @@ const avatars = [
 ];
 const text = [
     "A Hacker/Developer/CTFer/Undergraduate student from Taiwan. Happy hacking!",
-    "Beginner in programming/Java/C++/Python",
+    "A healthy developer who balances coding and well-being.",
 ];
 
 export default function About() {

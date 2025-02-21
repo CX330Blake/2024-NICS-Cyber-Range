@@ -37,7 +37,7 @@ export default function TransitionAlerts() {
                     className="max-w-xl mx-auto"
                 >
                     <p className="font-bold font-large font-sans">
-                        ☮️ STARdy stands in solidarity with Ukraine 💙💛
+                        ☮️ 1337 Work stands in solidarity with Ukraine 💙💛
                     </p>
                 </Alert>
             </Collapse>
